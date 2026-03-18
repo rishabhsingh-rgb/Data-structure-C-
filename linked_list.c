@@ -48,3 +48,83 @@ void new_list()
 	}
 	printf("Your new list is created.\n\n");
 }
+void functions()
+{
+	while(1)
+	{  int choice, item, pos, value;
+	    printf("\nWhat you want to do?\nPress 1 for printing the list.\nPress 2 for inserting a new node at beginning of list.\n");
+		printf("Press 3 for inserting a new node at end of list.\n");
+		printf("Press 4 for inserting a new node at desired location.\n");
+	    printf("Press 5 for inserting a new node after certain value(alredy existing in list).\n");
+	    printf("Press 6 for deleting a node from beginning.\n");
+	    printf("Press 7 for deleting a node from end.\n");
+	    printf("Press 8 for deleting a node from certain position.\n");
+	    printf("Press 0 to exit.\n");
+	    printf("Enter your choice: ");
+	    scanf("%d", &choice);
+		printf("\n");
+	 switch (choice)
+	 {
+	    case 0:
+		{   
+			free_list(); 
+	    	exit(0);
+		}	
+	    case 1:
+	    {
+		    traverse();
+		    break;
+	    }
+	    case 2:
+	    {
+		    printf("Enter the value to insert at beginning: ");
+		    scanf("%d", &item);
+		    insert_beg(item);
+		    break;
+	    }
+	        case 3:
+	    {
+		    printf("Enter the value to insert at end: ");
+		    scanf("%d", &item);
+		    insert_end(item);
+		    break;
+	    }
+	    case 4:
+    	{
+	    	printf("Enter the value and position of node you want to insert: ");
+	    	scanf("%d %d", &item, &pos);
+		    insert_pos(item, pos);
+		    break;
+    	}
+	    case 5:
+	    {
+		    printf("Enter the value to insert and value after which to insert: ");
+		    scanf("%d %d", &item, &value);
+		    insert_nodevalue(value, item);
+		    break;
+	    }
+	    case 6:
+	    {
+	    	del_beg();
+	    	break;
+    	}
+	    case 7:
+    	{
+	    	del_end();
+	    	break;
+    	}
+	    case 8:
+    	{
+	    	printf("Enter the position of node which you want to delete: ");
+	    	scanf("%d", &pos);
+	    	del_pos(pos);
+	    	break;
+	    }
+    	default:
+	    {
+	    	printf("\nInvalid choice.");
+	    	break;
+    	}
+	 }
+   }
+}
