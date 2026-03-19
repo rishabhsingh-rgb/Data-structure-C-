@@ -128,3 +128,45 @@ void functions()
 	 }
    }
 }
+
+void free_list()
+{
+    struct node*temp;
+
+    while(head!=NULL)
+    {
+        temp=head;
+        head=head->next;
+        free(temp);
+    }
+}
+void traverse()
+{
+	struct node *temp;
+	char choice2;
+	temp = head;
+	if (head == NULL)
+	{
+		printf("List is empty.\n");
+		printf("Do you want to create a new list? Press 'y' for yes and 'n' for no: ");
+		scanf(" %c", &choice2);
+		if (choice2 == 'y' || choice2=='Y')
+		{
+			new_list();
+			return;
+		}
+		else
+		    return;
+	}
+	else
+	{ 
+	   printf("Your list is:\n");
+	   while (temp != NULL)
+	  {
+		  printf("%d->", temp->value);
+		  temp = temp->next;
+	  }
+	  printf("NULL\n");
+
+    }		
+}
