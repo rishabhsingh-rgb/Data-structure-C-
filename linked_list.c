@@ -170,3 +170,17 @@ void traverse()
 
     }		
 }
+void insert_beg(int item)
+{
+	struct node *new;
+	new = (struct node *)malloc(sizeof(struct node));
+	if (new == NULL)
+	{
+		printf("Memory allocation failed\n");
+		return;
+	}
+	new->value = item;
+	new->next = head;
+	head = new;
+	printf("%d is inserted at beginning of the list.\n", item);
+}	
