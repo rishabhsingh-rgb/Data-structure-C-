@@ -184,3 +184,30 @@ void insert_beg(int item)
 	head = new;
 	printf("%d is inserted at beginning of the list.\n", item);
 }	
+void insert_end(int item)
+{
+	struct node *new, *temp;
+	new = (struct node *)malloc(sizeof(struct node));
+	if (new == NULL)
+	{
+		printf("Memory allocation failed\n");
+		return;
+	}
+	new->value = item;
+	temp = head;
+
+	if(head==NULL)
+	{
+		head=new;
+		printf("%d is inserted at the end of the list.\n", item);
+		return;
+	}
+	while (temp->next != NULL)
+	{
+		temp = temp->next;
+	}
+	temp->next = new;
+	new->next = NULL;
+	printf("%d is inserted at the end of the list.\n", item);
+	
+}
