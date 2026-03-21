@@ -211,3 +211,41 @@ void insert_end(int item)
 	printf("%d is inserted at the end of the list.\n", item);
 	
 }
+void insert_pos(int value, int pos)
+{
+	struct node *new, *temp;
+	int i;
+	if(head==NULL&&pos!=1)
+    {
+        printf("List is empty.\n");
+        return;
+    }
+	if(pos==1)
+    {
+        insert_beg(value);
+        return;
+    }
+	new = (struct node *)malloc(sizeof(struct node));
+	if (new == NULL)
+	{
+		printf("Memory allocation failed\n");
+		return;
+	}
+	new->value = value;
+	temp = head;
+	
+	for (i=1;i<pos-1;i++)
+	{
+		if (temp->next==NULL)
+		{
+			printf("List is shorter to insert.\n");
+			free(new);
+			return;
+		}
+		temp = temp->next;
+	}
+	new->next = temp->next;
+	temp->next = new;
+	printf("%d is inserted at %d position.\n", value, pos);
+	
+}
