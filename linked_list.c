@@ -249,3 +249,27 @@ void insert_pos(int value, int pos)
 	printf("%d is inserted at %d position.\n", value, pos);
 	
 }
+void insert_nodevalue(int value, int item)
+{
+	struct node *new, *temp;
+	new = (struct node *)malloc(sizeof(struct node));
+	if (new == NULL)
+	{
+		printf("Memory allocation failed\n");
+		return;
+	}
+	new->value = item;
+	temp = head;
+	while (temp != NULL && temp->value != value)
+		temp = temp->next;
+	if (temp == NULL)
+	{
+		printf("Value after which you want to insert new value does not exist in list.\n\n");
+		free(new);
+		return;
+	}
+	new->next = temp->next;
+	temp->next = new;
+	printf("%d is inserted after %d.\n", item, value);
+	
+}
