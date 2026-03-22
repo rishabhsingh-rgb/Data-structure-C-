@@ -273,3 +273,25 @@ void insert_nodevalue(int value, int item)
 	printf("%d is inserted after %d.\n", item, value);
 	
 }
+void del_beg()
+{
+	struct node *temp;
+	temp = head;
+	char choice;
+	if (head == NULL)
+	{
+		printf("List is empty.\n");
+		printf("Do you want to create a new list? Press 'y' for yes and 'n' for no: ");
+		scanf(" %c", &choice);
+		if (choice == 'y' || choice=='Y')
+	    {
+			new_list();
+			return;
+		}
+		else
+			return;
+	}
+	head = head->next;
+	free(temp);
+	printf("Successfully deleted the first node of the list.\n");
+}
