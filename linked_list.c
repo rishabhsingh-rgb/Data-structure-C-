@@ -295,3 +295,37 @@ void del_beg()
 	free(temp);
 	printf("Successfully deleted the first node of the list.\n");
 }
+void del_end()
+{
+	struct node *temp1, *temp2;
+	char choice;
+	temp1 = head;
+	if (head == NULL)
+	{
+		printf("List is empty.\n");
+		printf("Do you want to create a new list? Press 'y' for yes and 'n' for no: ");
+		scanf(" %c", &choice);
+		if (choice == 'y' || choice=='Y')
+	    {
+			new_list();
+			return;
+		}
+		else
+			return;
+	}
+	else if (head->next == NULL)
+	{
+		head = NULL;
+		free(temp1);
+		printf("Successfully deleted the last node from the list.\n");
+	}
+	else
+	{
+		while (temp1->next->next != NULL)
+			temp1 = temp1->next;
+		temp2 = temp1->next;
+		temp1->next = NULL;
+		free(temp2);
+		printf("Successfully deleted the last node from the list.\n");
+	}
+}
