@@ -329,3 +329,51 @@ void del_end()
 		printf("Successfully deleted the last node from the list.\n");
 	}
 }
+void del_pos(int pos)
+{
+	struct node *temp1, *temp2;
+	int i;
+	char choice;
+	temp1 = head;
+	if (head == NULL)
+	{
+		printf("List is empty.\n");
+		printf("Do you want to create a new list? Press 'y' for yes and 'n' for no: ");
+		scanf(" %c",&choice);
+		if (choice=='y'||choice=='Y')
+	    {
+			new_list();
+			return;
+		}
+		else
+			return;
+	}
+	else if (pos == 1)
+	{
+		head = head->next;
+		free(temp1);
+	}
+	else
+	{
+		for (i=1;i<pos-1;i++)
+        {
+            if(temp1==NULL||temp1->next==NULL)
+            {
+                printf("Position out of range.\n");
+                return;
+            }
+
+            temp1=temp1->next;
+        }
+
+        if (temp1->next==NULL)
+        {
+            printf("Position out of range.\n");
+            return;
+        }
+		temp2 = temp1->next;
+		temp1->next = temp2->next;
+		free(temp2);
+	}
+	printf("Successfully deleted the %d position node from beginning.\n", pos);
+}
