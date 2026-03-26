@@ -377,3 +377,26 @@ void del_pos(int pos)
 	}
 	printf("Successfully deleted the %d position node from beginning.\n", pos);
 }
+void main()
+{
+	char choice;
+	int choice2;
+	printf("Do you want to make a new linked-list? Type 'y' for yes or 'n' for no: ");
+	scanf(" %c", &choice);
+	if (choice == 'Y' || choice == 'y')
+	{
+		new_list();
+	}
+	else
+		exit(0);
+	printf("To access more options press 1 otherwise press 0: ");
+	scanf("%d", &choice2);
+	if (choice2 == 1)
+		functions();
+	else
+	{
+		free_list();
+		exit(0);
+	}	
+}
+
