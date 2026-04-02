@@ -82,3 +82,35 @@ void pop(char sym)
         exit(1);
     }
 }
+int main()
+{
+   char a[40];
+   int i=0;
+   printf("Enter the postfix-epression:- ");
+   scanf("%s",a);
+   while(a[i]!='\0')
+   {
+    if(a[i]=='0'||a[i]=='1'||a[i]=='2'||a[i]=='3'||a[i]=='4'||a[i]=='5'||a[i]=='6'||a[i]=='7'||a[i]=='8'||a[i]=='9')
+    {
+        push((int)a[i]-'0');
+    }
+    else if(a[i]=='*'||a[i]=='+'||a[i]=='-'||a[i]=='/'||a[i]=='^')
+    {
+        pop(a[i]);
+    }
+    else
+    {
+        printf("Invalid character: %c\n", a[i]);
+        exit(1);
+    }
+    i++;
+   }
+   if(stackSize != 1)
+    {
+        printf("Error: invalid postfix expression\n");
+        return 0;
+    }
+
+   printf("\nOutput is:- %d\n",top->value);
+   return 0;
+}
