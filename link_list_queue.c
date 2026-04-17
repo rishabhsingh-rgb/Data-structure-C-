@@ -46,3 +46,57 @@ void dequeue()
         free(temp);
     }
 }
+
+void display()
+{
+    struct node *temp;
+    temp=front;
+    if(front==NULL && rear==NULL)
+    {
+        printf("Queue is empty.\n");
+    }
+    else
+    {
+       printf("Queue is:-\n");
+       while(temp!=NULL)
+       {
+        printf("%d\n",temp->data);
+        temp=temp->next;
+       }
+    }   
+}
+
+int main()
+{
+    int item,choice;
+    while(1)
+    {
+        printf("\n-----QUEUE MENU-----\n");
+        printf("1.Enqueue\n");
+        printf("2.Dequeue\n");
+        printf("3.Display\n");
+        printf("0.Exit\n");
+        printf("\nEnter your choice:- ");
+        scanf("%d",&choice);
+
+        switch(choice)
+        {
+            case 1:
+              printf("Enter item to enqueue:- ");
+              scanf("%d",&item);
+              enqueue(item);
+              break;
+            case 2:
+              dequeue();
+              break;
+            case 3:
+              display();
+              break;
+            case 0:
+              return 0;
+            default:
+              printf("Invalid choice!!\n");        
+        }
+    }
+    return 0;
+}
