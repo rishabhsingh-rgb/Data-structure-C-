@@ -24,3 +24,25 @@ void enqueue(int item)
         printf("%d enqueued successfully.\n",item);
     }
 }
+
+void dequeue()
+{
+    struct node *temp;
+    temp=front;
+    if(front==NULL && rear==NULL )
+    {
+        printf("Queue is empty.\n");
+    }
+    else if(front==rear)
+    {
+        printf("%d dequeued successfully.\n",front->data);
+        front=rear=NULL;
+        free(temp);
+    }
+    else
+    {
+        printf("%d dequeued successfully.\n",front->data);
+        front=front->next;
+        free(temp);
+    }
+}
