@@ -23,3 +23,21 @@ void enqueue(int item)
         printf("%d enqueued successfully.\n",item);
     }
 }
+
+void dequeue()
+{
+    if(front==-1)
+    {
+        printf("Queue is empty.\n");
+    }
+    else if(front==rear)
+    {
+        printf("%d dequeued successfully.\n",queue[front]);
+        front=rear=-1;
+    }
+    else
+    {
+        printf("%d dequeued successfully.\n",queue[front]);
+        front=(front+1)%N;
+    }
+}
