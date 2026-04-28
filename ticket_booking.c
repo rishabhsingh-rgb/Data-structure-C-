@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-/* ================= STRUCTURES ================= */
+/*STRUCTURES*/
 
 struct Passenger {
     int pnr;
