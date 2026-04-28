@@ -18,3 +18,25 @@ struct Passenger {
 
     struct Passenger *next;
 };
+
+struct Train {
+    int trainNo;
+    char trainName[50];
+
+    int totalAC, availableAC, nextACSeat;
+    int totalSL, availableSL, nextSLSeat;
+    int totalRAC, availableRAC;
+
+    // Seat reuse
+    int freeACSeats[100];
+    int freeACCount;
+
+    int freeSLSeats[100];
+    int freeSLCount;
+
+    struct Passenger *confirmedHead;
+    struct Passenger *racHead, *racTail;
+    struct Passenger *waitingHead, *waitingTail;
+
+    struct Train *next;
+};
