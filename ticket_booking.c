@@ -40,3 +40,26 @@ struct Train {
 
     struct Train *next;
 };
+
+struct Train *head = NULL;
+int globalPNR = 1000;
+
+/*UTILIY*/
+
+struct Train* findTrain(int trainNo) {
+    struct Train *t = head;
+    while (t && t->trainNo != trainNo)
+        t = t->next;
+    return t;
+}
+
+int compareIgnoreCase(char a[], char b[]) {
+    int i=0;
+    while(a[i] && b[i]) {
+        char c1 = (a[i]>='A'&&a[i]<='Z')?a[i]+32:a[i];
+        char c2 = (b[i]>='A'&&b[i]<='Z')?b[i]+32:b[i];
+        if(c1!=c2) return 0;
+        i++;
+    }
+    return (a[i]=='\0' && b[i]=='\0');
+}
