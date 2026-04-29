@@ -63,3 +63,48 @@ int compareIgnoreCase(char a[], char b[]) {
     }
     return (a[i]=='\0' && b[i]=='\0');
 }
+
+/*ADD TRAIN*/
+
+void addTrain() {
+    struct Train *t = malloc(sizeof(struct Train));
+
+    printf("\nTrain Number: ");
+    scanf("%d",&t->trainNo);
+
+    if(findTrain(t->trainNo)){
+        printf("Train already exists!\n");
+        free(t);
+        return;
+    }
+
+    printf("Train Name: ");
+    scanf(" %[^\n]",t->trainName);
+
+    printf("AC Seats: ");
+    scanf("%d",&t->totalAC);
+
+    printf("Sleeper Seats: ");
+    scanf("%d",&t->totalSL);
+
+    printf("RAC Seats: ");
+    scanf("%d",&t->totalRAC);
+
+    t->availableAC=t->totalAC;
+    t->availableSL=t->totalSL;
+    t->availableRAC=t->totalRAC;
+
+    t->nextACSeat=t->nextSLSeat=1;
+
+    t->freeACCount=0;
+    t->freeSLCount=0;
+
+    t->confirmedHead=NULL;
+    t->racHead=t->racTail=NULL;
+    t->waitingHead=t->waitingTail=NULL;
+
+    t->next=head;
+    head=t;
+
+    printf("Train Added!\n");
+}
