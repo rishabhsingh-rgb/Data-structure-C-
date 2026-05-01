@@ -108,3 +108,17 @@ void addTrain() {
 
     printf("Train Added!\n");
 }
+
+/*QUEUE*/
+
+struct Passenger* popQueue(struct Passenger **head, struct Passenger **tail){
+    if(!(*head)) return NULL;
+
+    struct Passenger *temp=*head;
+    *head=temp->next;
+
+    if(!(*head)) *tail=NULL;
+
+    temp->next=NULL;
+    return temp;
+}
