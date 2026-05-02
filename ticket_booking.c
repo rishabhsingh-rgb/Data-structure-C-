@@ -122,3 +122,22 @@ struct Passenger* popQueue(struct Passenger **head, struct Passenger **tail){
     temp->next=NULL;
     return temp;
 }
+
+struct Passenger* removeFromList(struct Passenger **head, struct Passenger **tail, int pnr){
+    struct Passenger *curr=*head,*prev=NULL;
+
+    while(curr){
+        if(curr->pnr==pnr){
+            if(prev) prev->next=curr->next;
+            else *head=curr->next;
+
+            if(tail && curr==*tail) *tail=prev;
+
+            curr->next=NULL;
+            return curr;
+        }
+        prev=curr;
+        curr=curr->next;
+    }
+    return NULL;
+}
