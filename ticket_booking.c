@@ -141,3 +141,44 @@ struct Passenger* removeFromList(struct Passenger **head, struct Passenger **tai
     }
     return NULL;
 }
+
+/*BOOK*/
+
+void bookTicket(){
+    int trainNo,type;
+    printf("\nTrain No: ");
+    scanf("%d",&trainNo);
+
+    struct Train *t=findTrain(trainNo);
+    if(!t){
+        printf("Train Not Found!\n");
+        return;
+    }
+
+    struct Passenger *p=malloc(sizeof(struct Passenger));
+    p->pnr=globalPNR++;
+
+    printf("Name: ");
+    scanf(" %[^\n]",p->name);
+
+    printf("Age: ");
+    scanf("%d",&p->age);
+
+    if(p->age < 12){
+        char ch;
+        printf("Guardian present? (y/n): ");
+        scanf(" %c",&ch);
+
+        if(ch=='y'||ch=='Y'){
+            printf("Guardian Name: ");
+            scanf(" %[^\n]",p->guardian);
+        } else {
+            printf("Booking cancelled\n");
+            free(p);
+            return;
+        }
+    } else strcpy(p->guardian,"N/A");
+
+    printf("Seat Type (1=AC,2=Sleeper): ");
+    scanf("%d",&type);
+    p->seatType=type;
