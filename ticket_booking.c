@@ -182,3 +182,53 @@ void bookTicket(){
     printf("Seat Type (1=AC,2=Sleeper): ");
     scanf("%d",&type);
     p->seatType=type;
+    // CONFIRMED
+    if(type==1 && t->availableAC>0){
+
+        if(t->freeACCount>0)
+            p->seatNo=t->freeACSeats[--t->freeACCount];
+        else
+            p->seatNo=t->nextACSeat++;
+
+        sprintf(p->coach,"A%d",p->seatNo);
+        t->availableAC--;
+
+        strcpy(p->status,"CONFIRMED");
+        p->next=t->confirmedHead;
+        t->confirmedHead=p;
+    }
+    else if(type==2 && t->availableSL>0){
+
+        if(t->freeSLCount>0)
+            p->seatNo=t->freeSLSeats[--t->freeSLCount];
+        else
+            p->seatNo=t->nextSLSeat++;
+
+        sprintf(p->coach,"S%d",p->seatNo);
+        t->availableSL--;
+
+        strcpy(p->status,"CONFIRMED");
+        p->next=t->confirmedHead;
+        t->confirmedHead=p;
+    }
+    else if(t->availableRAC>0){
+        strcpy(p->status,"RAC");
+        p->seatNo=0; strcpy(p->coach,"-");
+        p->next=NULL;
+
+        if(!t->racHead) t->racHead=t->racTail=p;
+        else {t->racTail->next=p; t->racTail=p;}
+
+        t->availableRAC--;
+    }
+    else{
+        strcpy(p->status,"WAITING");
+        p->seatNo=0; strcpy(p->coach,"-");
+        p->next=NULL;
+
+        if(!t->waitingHead) t->waitingHead=t->waitingTail=p;
+        else {t->waitingTail->next=p; t->waitingTail=p;}
+    }
+
+    printf("PNR: %d Status: %s\n",p->pnr,p->status);
+}
