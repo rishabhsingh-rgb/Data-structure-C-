@@ -232,3 +232,21 @@ void bookTicket(){
 
     printf("PNR: %d Status: %s\n",p->pnr,p->status);
 }
+
+/*SEARCH TRAIN*/
+
+void searchTrainByName(){
+    char name[50];
+    printf("Enter name: ");
+    scanf(" %[^\n]",name);
+
+    struct Train *t=head;
+    while(t){
+        if(compareIgnoreCase(t->trainName,name))
+            printf("Found: %s (%d)\n",t->trainName,t->trainNo);
+            printf("AC availabe: %d\n",t->availableAC);
+            printf("SL availabe: %d\n",t->availableSL);
+            printf("RAC availabe: %d\n",t->availableRAC);
+        t=t->next;
+    }
+}
