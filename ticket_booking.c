@@ -250,3 +250,28 @@ void searchTrainByName(){
         t=t->next;
     }
 }
+
+/*SEARCH PNR*/
+
+void searchByPNR(){
+    int pnr;
+    printf("\nEnter PNR: ");
+    scanf("%d",&pnr);
+
+    struct Train *t=head;
+    while(t){
+        struct Passenger *p;
+
+        p=t->confirmedHead;
+        while(p){ if(p->pnr==pnr){ printf("CONFIRMED\n"); return;} p=p->next;}
+
+        p=t->racHead;
+        while(p){ if(p->pnr==pnr){ printf("RAC\n"); return;} p=p->next;}
+
+        p=t->waitingHead;
+        while(p){ if(p->pnr==pnr){ printf("WAITING\n"); return;} p=p->next;}
+
+        t=t->next;
+    }
+    printf("Not found\n");
+}
