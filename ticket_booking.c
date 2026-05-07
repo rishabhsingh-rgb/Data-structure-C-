@@ -304,3 +304,71 @@ void printTicket() {
 
     printf("PNR Not Found!\n");
 }
+
+/*CANCEL*/
+
+void cancelTicket(){
+    int pnr;
+    printf("Enter PNR: ");
+    scanf("%d",&pnr);
+
+    struct Train *t=head;
+
+    while(t){
+        struct Passenger *p;
+
+        // CONFIRMED
+        p=removeFromList(&t->confirmedHead,NULL,pnr);
+        if(p){
+            if(p->seatType==1){
+                t->availableAC++;
+                t->freeACSeats[t->freeACCount++]=p->seatNo;
+            } else {
+                t->availableSL++;
+                t->freeSLSeats[t->freeSLCount++]=p->seatNo;
+            }
+
+            printf("PNR %d cancelled (CONFIRMED)\n", pnr);
+
+            free(p);
+
+            // RAC→CONFIRMED
+            struct Passenger *rac=popQueue(&t->racHead,&t->racTail);
+            if(rac){
+                strcpy(rac->status,"CONFIRMED");
+                printf("RAC passenger PNR %d upgraded to CONFIRMED\n", rac->pnr);
+
+                if(rac->seatType==1){
+                    if(t->freeACCount>0)
+                        rac->seatNo=t->freeACSeats[--t->freeACCount];
+                    else
+                        rac->seatNo=t->nextACSeat++;
+
+                    sprintf(rac->coach,"A%d",rac->seatNo);
+                    t->availableAC--;
+                } else {
+                    if(t->freeSLCount>0)
+                        rac->seatNo=t->freeSLSeats[--t->freeSLCount];
+                    else
+                        rac->seatNo=t->nextSLSeat++;
+
+                    sprintf(rac->coach,"S%d",rac->seatNo);
+                    t->availableSL--;
+                }
+
+                rac->next=t->confirmedHead;
+                t->confirmedHead=rac;
+
+                // WAITING→RAC
+                struct Passenger *w=popQueue(&t->waitingHead,&t->waitingTail);
+                if(w){
+                    strcpy(w->status,"RAC");
+                    printf("Waiting passenger PNR %d moved to RAC\n", w->pnr);
+
+                    w->next=NULL;
+                    if(!t->racHead) t->racHead=t->racTail=w;
+                    else {t->racTail->next=w; t->racTail=w;}
+                }
+            }
+            return;
+        }
