@@ -275,3 +275,32 @@ void searchByPNR(){
     }
     printf("Not found\n");
 }
+
+/*PRINT*/
+
+void printTicket() {
+    int pnr;
+    printf("Enter PNR: ");
+    scanf("%d",&pnr);
+
+    struct Train *t=head;
+
+    while(t){
+        struct Passenger *p;
+
+        p=t->confirmedHead;
+        while(p){
+            if(p->pnr==pnr){
+                printf("\n===== RAILWAY TICKET =====\n");
+                printf("PNR: %d\nTrain: %s\n",p->pnr,t->trainName);
+                printf("Name: %s Age:%d\n",p->name,p->age);
+                printf("Seat: %s Status: CONFIRMED\n",p->coach);
+                return;
+            }
+            p=p->next;
+        }
+        t=t->next;
+    }
+
+    printf("PNR Not Found!\n");
+}
