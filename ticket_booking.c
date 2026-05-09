@@ -372,3 +372,26 @@ void cancelTicket(){
             }
             return;
         }
+        
+        //RAC
+        p=removeFromList(&t->racHead,&t->racTail,pnr);
+        if(p){
+            printf("PNR %d cancelled (RAC)\n", pnr);
+            t->availableRAC++;
+            free(p);
+            return;
+        }
+
+        // WAITING
+        p=removeFromList(&t->waitingHead,&t->waitingTail,pnr);
+        if(p){
+            printf("PNR %d cancelled (WAITING)\n", pnr);
+            free(p);
+            return;
+        }
+
+        t=t->next;
+    }
+
+    printf("PNR %d not found\n", pnr);
+}
