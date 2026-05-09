@@ -395,3 +395,24 @@ void cancelTicket(){
 
     printf("PNR %d not found\n", pnr);
 }
+
+int main(){
+    int ch;
+    printf("========Railway Ticket Booking========\n");
+    while(1){
+        printf("\n1.Add Train\n2.Book\n3.Search Train\n4.Search PNR\n5.Print Ticket\n6.Cancel Ticket\n7.Exit\n");
+        printf("Enter choice: ");
+        scanf("%d",&ch);
+
+        switch(ch){
+            case 1: addTrain(); break;
+            case 2: bookTicket(); break;
+            case 3: searchTrainByName(); break;
+            case 4: searchByPNR(); break;
+            case 5: printTicket(); break;
+            case 6: cancelTicket(); break;
+            case 7: exit(0);
+            default: printf("Invalid\n");
+        }
+    }
+}
