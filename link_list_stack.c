@@ -24,3 +24,18 @@ void push()
     printf("%d Pushed successfully.\n",item);
     
 }
+void pop()
+{
+    struct node *temp;
+    if(top==NULL)
+    {
+        printf("Stack underflow.\n");
+    }
+    else
+    {
+        printf("%d popped from stack.\n",top->value);
+        temp=top;
+        top=top->next;
+        free(temp);
+    }
+}
