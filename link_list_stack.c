@@ -39,3 +39,33 @@ void pop()
         free(temp);
     }
 }
+void peek()
+{
+    if(top==NULL)
+    {
+        printf("Stack is empty.\n");
+    }
+    else
+    {
+        printf("Top element is %d.\n",top->value);
+    }
+}
+
+void display()
+{
+    struct node *temp;
+    if(top==NULL)
+    {
+        printf("Stack is empty.\n");
+    }
+    else
+    {
+        temp=top;
+        printf("Stack is:\n");
+        while(temp!=NULL)
+        {
+            printf("%d\n",temp->value);
+            temp=temp->next;
+        }
+    }
+}
