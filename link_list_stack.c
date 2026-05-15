@@ -69,3 +69,40 @@ void display()
         }
     }
 }
+
+int main()
+{
+    while(1)
+    {
+        int choice;
+        printf("\n----STACK MENU----\n");
+        printf("1.Push\n");
+        printf("2.Pop\n");
+        printf("3.Peek\n");
+        printf("4.Display\n");
+        printf("5.Exit\n");
+
+        printf("Enter your choice: ");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:
+                push();
+                break;
+            case 2:
+                pop();
+                break;
+            case 3:
+                peek();
+                break;
+            case 4:
+                display();
+                break;
+            case 5:
+                return 0;
+            default:
+                printf("Enter valid choice!\n");                    
+        }
+    }
+    return 0;
+}
